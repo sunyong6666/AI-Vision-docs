@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # Registers
 
 ## Register Description
