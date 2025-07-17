@@ -14,8 +14,8 @@ When the port protocol is switched to **SPIKE Mode**, the K210 simulates the out
 | Face Recognition                       | 9 if learned face found, otherwise -1 | 0               | 0                      | Face X coordinate   | Face Y coordinate   |
 | Facial Attribute Detection             | 9 if face found, otherwise -1         | —               | 1=open mouth, 0=closed | 1=smile, 0=neutral  | 1=glasses, 0=none   |
 | Deep Learning Recognition              | Learned ID if found, otherwise -1     | —               | —                      | —                   | —                   |
-| Road Sign Recognition                  | 9 if found, otherwise -1              | 0               | 0                      | Card X coordinate   | Card Y coordinate   |
-| Wi-Fi Streaming Status                 | 1 if connected, otherwise 0           | —               | —                      | —                   | —                   |
+| Road Sign Recognition                  | 9 if found, otherwise -1              | 0               | Object ID              | Card X coordinate   | Card Y coordinate   |
+| Wi-Fi Streaming Status                 | -1                                    | —               | —                      | —                   | —                   |
 | Settings Interface                     | -1                                    | 0               | 0                      | 0                   | 0                   |
 
 > Notes:
