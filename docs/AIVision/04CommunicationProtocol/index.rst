@@ -1,4 +1,4 @@
-CommunicationProtocol
+Communication Protocol
 ========================
 
 .. toctree::
