@@ -8,6 +8,7 @@ AI Vision
    01Introduction.md
    02QuickStart.md
    03ControlInterfaceDescription.md
+   04CommunicationProtocol/index
    07FirmwareFlashing.md
    
 
