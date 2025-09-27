@@ -2,8 +2,7 @@ AI Function
 ========================
 
 .. toctree::
-   :maxdepth: 3
-   :numbered: 4
+
 
 
   
