@@ -23,5 +23,5 @@ After a successful connection, the screen will show the `SSID`,  `password`, and
 + After waking the screen, long press the button to open a confirmation dialog and choose Exit Transmission.
 + When the user confirms exit, the screen will briefly display “Reloading camera”, then return to the QR code connection interface.
 
-![](img/WF3.jpeg)
+![](img/WF3.jpg)
 
