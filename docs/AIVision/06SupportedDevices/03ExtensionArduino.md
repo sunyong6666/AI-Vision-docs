@@ -839,3 +839,355 @@ When the visual module does not recognize the tag, it prints "no find tag" on th
 
 ****
 
+**Example 2: Judge Recognized 20-Class Objects**
+
+| ![](img/A41.jpeg) | ![](img/A42.png) |
+| :---: | :---: |
+
+
+<font style="color:rgb(38, 38, 38);">"Bike" and "car" pictures.</font>
+
+<font style="color:rgb(38, 38, 38);"></font>
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到20类物体识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_20_CLASS); 
+    delay(1000);               // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到20类物体
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_20_CLASS) > 0)
+    {
+        // 获取20类物体id
+        uint8_t target_id = ai_camrea_handle.get_identify_id(AI_CAMERA_20_CLASS);
+        if (target_id == 1)
+        {
+            Serial.println("识别到自行车");
+        }
+        else
+        {
+            Serial.println("其他物体");
+        }
+    }
+    else
+    {
+        Serial.println("no find 20 class");
+    }
+    delay(400);
+}
+```
+
+![](img/A43.gif)
+
+When the vision module recognizes "bicycle", it prints "recognized bicycle" on the serial port; when the vision module recognizes "car", it prints "other objects" on the serial port; when no objects matching the 20 categories are recognized, it prints "no find 20 class".
+
+##### <font style="color:rgb(38, 38, 38);">get_identify_rotation</font>
++ get_identify_rotation(uint8_t features, uint8_t index=0)
+
+Get the rotation Angle of the object being identified
+
+> Currently, only the tag recognition mode supports the rotation Angle. The value obtained by other modes is always 0
+>
+
+
+
+**Parameter **
+
++ features function selection
+    - AI_CAMERA_TAG     # Tag Recognition
++ index: which object the index identifies
+    - The default is 0. Generally, 0 is ok. This parameter is reserved for future functional extensions
+
+
+
+**Return Value:**
+
+0~359
+
+**Example:**
+
+![](img/A44.png)
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到标签识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_TAG); 
+    delay(1000);               // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到标签
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_TAG) > 0)
+    {
+        // 获取标签旋转角度
+        int rot = ai_camrea_handle.get_identify_rotation(AI_CAMERA_TAG);
+        Serial.print("rot: ");
+        Serial.println(rot);
+    }
+    else
+    {
+        Serial.println("no find tag");
+    }
+    delay(400);
+}
+```
+
+![](img/A45.gif)
+
+<font style="color:rgb(38, 38, 38);">When the visual module recognizes the tag, rotate the visual module and print the Angle of the tag relative to the visual module through the serial port. If the tag is not recognized, print "no find tag" through the serial port.</font>
+
+##### <font style="color:rgb(38, 38, 38);">get_identify_position</font>
++ <font style="color:rgb(38, 38, 38);">get_identify_position(uint8_t features, int16_t position[4], uint8_t index=0)</font>
+
+<font style="color:rgb(38, 38, 38);">Get the position of the object being identified</font>
+
+> + <font style="color:rgb(38, 38, 38);">Line recognition : There are three rectangular boxes, from bottom to top, index 0,1,2</font>
+>
+
+<font style="color:rgb(38, 38, 38);"></font>
+
+**Parameter:**![](img/A46.png)
+
++ <font style="color:rgb(38, 38, 38);">features → Feature selection</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_PATCH            //  Color Block Tracking</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_TAG                // Tag Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_LINE               // Line Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_20_CLASS       // 20-Class Object Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_QRCODE         // QR Code Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_FACE_ATTRIBUTE // Face Attribute Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_FACE_RE         //Face Recognition</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_DEEP_LEARN // Deep Learning</font>
+    - <font style="color:rgb(38, 38, 38);">AI_CAMERA_CARD             // Card Recognition</font>
++ <font style="color:rgb(38, 38, 38);">position[4] </font>`<font style="color:rgb(38, 38, 38);">int16_t</font>`<font style="color:rgb(38, 38, 38);">type, size of 4 is the position buffer</font>
+
+<font style="color:rgb(38, 38, 38);">The four values represent x, y, w, and h respectively</font>
+
++ <font style="color:rgb(38, 38, 38);">index :which object the index identifies</font>
+    - <font style="color:rgb(38, 38, 38);">Default is 0</font>
+
+
+
+**Example**
+
+![](img/A47.png)
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到标签识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_TAG); 
+    delay(1000);               // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到标签
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_TAG) > 0)
+    {
+        // 位置缓冲区
+        int position[4] = {0};
+        // 获取位置
+        ai_camrea_handle.get_identify_position(AI_CAMERA_TAG, position);
+        Serial.print("x y w h:(");
+        Serial.print(position[0]);
+        Serial.print(" ");
+        Serial.print(position[1]);
+        Serial.print(" ");
+        Serial.print(position[2]);
+        Serial.print(" ");
+        Serial.print(position[3]);
+        Serial.println(")");
+        
+        
+        int pos_x = position[0]; // 得到x坐标
+        if (pos_x > 170)
+        {
+            Serial.println("位置偏右");
+        }
+        else
+        {
+            Serial.println("位置偏左");
+        }
+    }
+    else
+    {
+        Serial.println("no find tag");
+    }
+    delay(400);
+}
+```
+
+![](img/A48.gif)
+
+<font style="color:rgb(38, 38, 38);">When the vision module recognizes a tag, the serial monitor prints the tag’s coordinates.</font>
+
+<font style="color:rgb(38, 38, 38);">When the vision module is moved left or right, it prints “Tag on the left” or “Tag on the right” accordingly.</font>
+
+<font style="color:rgb(38, 38, 38);">If no tag is recognized, the serial monitor prints “No tag detected.”</font>
+
+
+
+##### <font style="color:rgb(38, 38, 38);">get_identify_position</font>
++ get_identify_position(AI_CAMERA_REGISTER_t features, int &x, int &y, int &w, int &h, uint8_t index=0)
+
+
+
+**参数:**
+
++ features → Feature selection
+    - AI_CAMERA_PATCH            //<font style="color:rgb(38, 38, 38);">Color Block Tracking</font>
+    - AI_CAMERA_TAG                // Tag Recognition
+    - AI_CAMERA_LINE               // Line Recognition
+    - AI_CAMERA_20_CLASS       // 20-Class Object Recognition
+    - AI_CAMERA_QRCODE         // QR Code Recognition
+    - AI_CAMERA_FACE_ATTRIBUTE // Face Recognition
+    - AI_CAMERA_FACE_RE         //Face Recognition
+    - AI_CAMERA_DEEP_LEARN // Deep Learning
+    - AI_CAMERA_CARD             // Card Recognition
++ x – X coordinate, reference to an int variable
++ y – Y coordinate, reference to an int variable
++ w – Width (w), reference to an int variable
++ h – Height (h), reference to an int variable
++ index – The index of the recognized object, default value is 0
+
+<font style="color:rgb(38, 38, 38);"></font>
+
+**<font style="color:rgb(38, 38, 38);">Example</font>**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到标签识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_TAG); 
+    delay(1000);               // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到标签
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_TAG) > 0)
+    {
+        // 位置缓冲区
+        int x, y, w, h;
+        // 获取位置
+        ai_camrea_handle.get_identify_position(AI_CAMERA_TAG, x, y, w, h);
+        Serial.print("x y w h:(");
+        Serial.print(x);
+        Serial.print(" ");
+        Serial.print(y);
+        Serial.print(" ");
+        Serial.print(w);
+        Serial.print(" ");
+        Serial.print(h);
+        Serial.println(")");
+        
+        
+        int pos_x = x; 
+        if (pos_x > 170)
+        {
+            Serial.println("位置偏右");
+        }
+        else
+        {
+            Serial.println("位置偏左");
+        }
+    }
+    else
+    {
+        Serial.println("no find tag");
+    }
+    delay(400);
+}
+```
+
+> Recognition effect, refer to the previous function of the same name
+>
+
+##### set_wifi_server_is_scan_qrcode
++ set_wifi_server_is_scan_qrcode(bool is_scan)
+
+Set whether to connect to Wi-Fi using QR code scanning. This must be configured before entering the Wi-Fi transmission mode.
+
+
+
+**Parameters:  **
+
++ is_scan Whether to connect via QR code scanning
+    - **1** = Yes；**0** = No
+
+
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+
+     // 设置通过扫描二维码连接wifi
+    ai_camrea_handle.set_wifi_server_is_scan_qrcode(1);
+    
+    // 切换至无线图传
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_WIFI_SERVER); 
+    delay(1000);               // 等待切换完成
+}
+void loop()
+{
+    String ssid, password; // 定义 ssid password
+    //获取连接到的wifi的ssid password
+    ai_camrea_handle.get_wifi_server_ssid_passward(ssid, password);
+    Serial.print("ssid: ");
+    Serial.print(ssid);
+    Serial.print(", password: ");
+    Serial.println(password);
+    Serial.print("ip: ");
+    Serial.println(ai_camrea_handle.get_wifi_server_ip()); // 获取连接连接到的ip地址
+    delay(400);
+}
+```
