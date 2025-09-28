@@ -841,7 +841,7 @@ When the visual module does not recognize the tag, it prints "no find tag" on th
 
 **Example 2: Judge Recognized 20-Class Objects**
 
-| ![](img/A41.jpeg) | ![](img/A42.png) |
+| ![](img/A41.jpg) | ![](img/A42.png) |
 | :---: | :---: |
 
 
