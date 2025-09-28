@@ -15,7 +15,7 @@ Based on this library, users can develop programs that achieve higher efficiency
 
 Software Requirements
 
-| ![](img/A5.png) | ![](img/A6.bmp) |
+| ![](img/A5.png) | ![](img/A6.png) |
 | :---: | :---: |
 | Arduino IDE | Vision Module API Library |
 
@@ -969,7 +969,7 @@ void loop()
 
 <font style="color:rgb(38, 38, 38);"></font>
 
-**Parameter:**![](img/A46.svg)
+**Parameter:**![](img/A46.png)
 
 + <font style="color:rgb(38, 38, 38);">features → Feature selection</font>
     - <font style="color:rgb(38, 38, 38);">AI_CAMERA_PATCH            //  Color Block Tracking</font>
