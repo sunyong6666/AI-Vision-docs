@@ -1192,3 +1192,147 @@ void loop()
     delay(400);
 }
 ```
+
+##### get_wifi_server_ssid_passward
++ get_wifi_server_ssid_passward(String &ssid, String &password)
+
+Get the SSID and password of the connected wifi
+
+
+
+**Parameters:**
+
++ ssid Wi-Fi SSID, reference to a String-type variable
+
+> Supports any name, with no language restriction. However, the total length is generally recommended not to exceed 20 characters.
+>
+
++ password Wi-Fi password, reference to a String-type variable
+
+> Supports any name, with no language restriction. However, the total length is generally recommended not to exceed 20 characters.
+>
+
+
+
+**Example**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+
+    // 设置通过扫描二维码连接wifi
+    ai_camrea_handle.set_wifi_server_is_scan_qrcode(1);
+    
+    // 切换至无线图传
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_WIFI_SERVER); 
+    delay(1000);               // 等待切换完成
+}
+void loop()
+{
+    String ssid, password; // 定义 ssid password
+    //获取连接到的wifi的ssid password
+    ai_camrea_handle.get_wifi_server_ssid_passward(ssid, password);
+    Serial.print("ssid: ");
+    Serial.print(ssid);
+    Serial.print(", password: ");
+    Serial.println(password);
+    Serial.print("ip: ");
+    Serial.println(ai_camrea_handle.get_wifi_server_ip()); // 获取连接连接到的ip地址
+    delay(400);
+}
+```
+
+
+
+##### set_wifi_server_ssid_passward
++ set_wifi_server_ssid_passward(const char *ssid, const char *password)
+
+Set the name and password to connect to wifi
+
+> This setting needs to be set before entering the image transfer mode, otherwise it is invalid
+>
+
+**Parameters:**
+
++ ssid Wi-Fi name
++ password Wi-Fi password
+
+
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 设置连接WiFi的名称与密码
+    ai_camrea_handle.set_wifi_server_ssid_passward("wifi_name", "wifi_password");
+    // 切换至无线图传
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_WIFI_SERVER); 
+    delay(1000);               // 等待切换完成
+}
+void loop()
+{
+    Serial.print("ip: ");
+    Serial.println(ai_camrea_handle.get_wifi_server_ip()); // 获取连接连接到的ip地址
+    delay(400);
+}
+```
+
+##### get_wifi_server_ip
++ get_wifi_server_ip()
+
+
+
+**Return Value:  **
+
+A string representing the IP address.
+
+If the Wi-Fi connection fails, it returns "0.0.0.0" or an empty string "".
+
+If the Wi-Fi connection succeeds, it returns the IP address in the format, e.g., "192.168.132.34".
+
+
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 设置连接WiFi的名称与密码
+    ai_camrea_handle.set_wifi_server_ssid_passward("wifi_name", "wifi_password");
+    // 切换至无线图传
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_WIFI_SERVER); 
+    delay(1000);               // 等待切换完成
+}
+void loop()
+{
+    Serial.print("ip: ");
+    Serial.println(ai_camrea_handle.get_wifi_server_ip()); // 获取连接连接到的ip地址
+    delay(400);
+}
+```
+
