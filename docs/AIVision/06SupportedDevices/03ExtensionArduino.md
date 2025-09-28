@@ -789,10 +789,10 @@ Meaning depends on the selected mode (see explanation above).
 
 <font style="color:rgb(38, 38, 38);">Example 1: Judge the Recognized Tag ID</font>
 
-| ![](img/A31.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A32.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A33.png?x-oss-process=image%2Fformat%2Cwebp) |
+| ![](img/A31.png) | ![](img/A32.png) | ![](img/A33.png) |
 | --- | --- | --- |
-| ![](img/A34.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A35.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A36.png?x-oss-process=image%2Fformat%2Cwebp) |
-| ![](img/A37.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A38.png?x-oss-process=image%2Fformat%2Cwebp) | ![](img/A39.png?x-oss-process=image%2Fformat%2Cwebp) |
+| ![](img/A34.png) | ![](img/A35.png) | ![](img/A36.png) |
+| ![](img/A37.png) | ![](img/A38.png) | ![](img/A39.png) |
 
 
 <font style="color:rgb(38, 38, 38);">ID tags from 0 to 8.</font>
