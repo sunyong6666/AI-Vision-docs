@@ -297,4 +297,545 @@ void loop()
 
 When switching modes using the rotary dial, if you switch to Tag Recognition mode or Face Detection mode, the serial monitor will print the corresponding mode name.
 
+##### get_color_rgb
++ get_color_rgb(int rgb[3])
+
+Retrieves the RGB values from the Color Recognition mode.
+
+**Parameters:**
+
++ rgb[3] → An integer array of size 3, used as the RGB buffer.
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到颜色获取模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_COLOR); 
+    delay(1000);                    // 等待切换完成
+}
+
+void loop()
+{
+    int rgb[3] = {0}; // rgb数组数据缓冲区
+    ai_camrea_handle.get_color_rgb(rgb); // 获取rgb数据
+    Serial.print("rgb:(");
+    Serial.print(rgb[0]);
+    Serial.print(" ");
+    Serial.print(rgb[1]);
+    Serial.print(" ");
+    Serial.print(rgb[2]);
+    Serial.println(")");
+
+    delay(400);
+}
+```
+
+![](img/A24.gif)
+
+In the center of the visual module is a white rectangular box, which is used for color extraction.
+
+Below the white box, the screen displays the extracted RGB value in real time, which is consistent with the result of serial port printing output.
+
+##### get_color_rgb
++ get_color_rgb(int &r, int &g, int &b)
+
+
+
+**Parameters:**
+
++ r → Reference to an integer storing the Red value
++ g → Reference to an integer storing the Green value
++ b → Reference to an integer storing the Blue value
+
+
+
+** Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到颜色获取模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_COLOR); 
+    delay(1000);                    // 等待切换完成
+}
+
+void loop()
+{
+    int r, g, b; // 
+    ai_camrea_handle.get_color_rgb(r, g, b); // 获取rgb数据
+    Serial.print("rgb:(");
+    Serial.print(r);
+    Serial.print(" ");
+    Serial.print(g);
+    Serial.print(" ");
+    Serial.print(b);
+    Serial.println(")");
+
+    delay(400);
+}
+```
+
+> Use the reference to the previous function of the same name
+>
+
+##### set_find_color
++ set_find_color(uint8_t color_id)
+
+Sets the target color for Color Block Tracking mode.
+
+**Parameters:**
+
++ color_id →The color to be tracked. Options:
+    - AI_CAMERA_COLOR_RED      // Red
+    - AI_CAMERA_COLOR_GREEN //  Green  
+    - AI_CAMERA_COLOR_BLUE    //  Blue  
+    - AI_CAMERA_COLOR_YELLOW // Yellow
+    - AI_CAMERA_COLOR_BLACK   //  Black  
+    - AI_CAMERA_COLOR_WHITE  // White
+
+** Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到色块追踪模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_PATCH); 
+    delay(1000);                    // 等待切换完成
+    ai_camrea_handle.set_find_color(AI_CAMERA_COLOR_GREEN);// 设置追踪绿色
+}
+
+void loop()
+{
+}
+```
+
+![](img/A25.gif)
+
+After uploading the code to the development board and resetting the chip, the Vision Module switches from Color Recognition mode to Color Block Tracking mode, and the top-right indicator updates to show the tracking color as Green.
+
+##### face_study
++ face_study()
+
+Trigger Face Recognition Learning
+
+> It learns only when a face is recognized, otherwise the instruction is invalid
+>
+> After learning, the ID of the current face is automatically assigned, ranging from 0 to 3. If more than 4 are exceeded, it will be overwritten from 0
+>
+
+
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到人脸识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_FACE_RE); 
+    delay(1000);                    // 等待切换完成
+    ai_camrea_handle.face_study();  // 人脸学习
+}
+
+void loop()
+{
+}
+```
+
+![](img/A27.gif)
+
+Upload the code to the development board, and reset the chip when the visual module can recognize the face. The visual module switches from color recognition mode to face recognition mode and learns the recognized face. The white box of the face is switched to orange box, and an ID is assigned to it.
+
+##### deep_learn_study
++ deep_learn_study()
+
+Make deep recognition learning
+
+> Take a series of photos when the photo is longer than 5s or the category exceeds 4, and enter recognition mode
+>
+
+
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到深度识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_DEEP_LEARN); 
+    delay(1000);                          // 等待切换完成
+    ai_camrea_handle.deep_learn_study();  // 深度学习
+}
+
+void loop()
+{
+}
+```
+
+![](img/A27.gif)
+
+Upload the code to the development board, reset the chip, and switch the vision module to deep learning mode and carry out deep learning.
+
+##### get_face_attributes
++ get_face_attributes(int &is_male, int &is_mouth_open, int &is_smail, int &is_glasses, uint8_t index=0)
+
+Obtain face attributes
+
+
+
+**Parameters:**
+
++ is_male → Whether the face is male
++ is_mouth_open → Whether the mouth is open
++ is_glasses → Whether glasses are worn
++ index → The index of the detected face (default: the first face)
+
+**Example:**
+
+```cpp
+#include <Arduino.h>    // 引入 Arduino 头文件
+#include "ai_camera.h"  // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup() 
+{
+    Serial.begin(115200); // 初始化串口
+    ai_camrea_handle.begin();    // 初始化
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_FACE_ATTRIBUTE); // 设置模式为人脸属性识别模式
+    delay(1000); // 等待切换完成
+}
+
+void loop() 
+{
+    // 判断是否找到人脸
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_FACE_ATTRIBUTE) > 0)
+    {
+        // 获取人脸属性
+        int is_male, is_mouth_open, is_smail, is_glasses;
+        ai_camrea_handle.get_face_attributes(is_male, is_mouth_open, is_smail, is_glasses);
+        Serial.print("is_male: ");
+        Serial.print(is_male);
+        Serial.print(", is_mouth_open: ");
+        Serial.print(is_mouth_open);
+        Serial.print(", is_smail: ");
+        Serial.print(is_smail);
+        Serial.print(", is_glasses: ");
+        Serial.println(is_glasses);
+    }
+    else
+    {
+        Serial.println("No face detected.");
+    }
+
+    delay(400);
+}
+```
+
+##### get_identify_num
++ get_identify_num(uint8_t features, uint8_t total=0)
+
+Get the number of identifications or whether the identification was made
+
+
+
+**Parameters:  **
+
++ features → Feature selection
+    - AI_CAMERA_PATCH   # Color Block Tracking
+    - AI_CAMERA_TAG     # Tag Recognition
+    - AI_CAMERA_LINE    # Line Recognition
+    - AI_CAMERA_20_CLASS# 20-Class Object Recognition
+    - AI_CAMERA_QRCODE  # QR Code Recognition
+    - AI_CAMERA_FACE_ATTRIBUTE # Face Attribute Recognition
+    - AI_CAMERA_FACE_RE # Face Recognition
+    - AI_CAMERA_DEEP_LEARN # Deep Learning
+    - AI_CAMERA_CARD # Card Recognition
++ total → Total number of recognized objects
+
+> In Face Recognition mode:
+>
+> total = 0 (default) → Returns the number of learned faces detected.
+>
+> total = 1 → Returns the total number of faces detected on screen (both learned and unlearned).
+>
+> In other modes: This parameter is ignored.
+>
+
+**Return Value:**
+
++ In Color Block Tracking, Line Recognition, QR Code Recognition, and Deep Learning modes:
+
+Returns 1 if an object is recognized.
+
+Returns 0 if no object is recognized.
+
++ In Tag Recognition, 20-Class Object Recognition, Face Attribute, and Card Recognition modes:
+
+Returns the number of objects recognized.
+
+> In Face Recognition mode:
+>
+> Default returns the number of learned faces recognized.
+>
+> If total = 1, returns the total number of faces (learned + unlearned).
+>
+
+**Example:**
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到色块追踪模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_PATCH); 
+    delay(1000);                          // 等待切换完成
+    ai_camrea_handle.set_find_color(AI_CAMERA_COLOR_GREEN);// 设置追踪绿色
+}
+
+void loop()
+{
+    // 判断是否找到色块
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_PATCH) > 0)
+    {
+        Serial.println("find patch");
+    }
+    else
+    {
+        Serial.println("no find patch");
+    }
+    delay(400);
+}
+```
+
+![](img/A28.gif)
+
+When the visual module recognizes a green object, it boxes it out and prints "find patch" on the serial port. If no green object is recognized, it prints "no find patch" on the serial port.
+
+
+
+##### get_qrcode_content
++ get_qrcode_content()
+
+Get the content identified by the QR code
+
+
+
+**Return Value:**
+
+Returns a string (std::string type).
+
+
+
+**Example:**
+
+![](img/A29.png)
+
+A QR code with the content "hello".
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到二维码识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_QRCODE); 
+    delay(1000);              // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到二维码
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_QRCODE) > 0)
+    {
+        // 获取二维码内容
+        std::string qrcode_content = ai_camrea_handle.get_qrcode_content(); 
+        Serial.print("qrocde content: ");
+        Serial.println(qrcode_content);
+    }
+    else
+    {
+        Serial.println("no find qrcode");
+    }
+    delay(400);
+}
+```
+
+![](img/A30.gif)
+
+When the visual module recognizes the QR code generated by the QR code generation tool with the content "hello", it prints "qrcode content: hello" through the serial port. If the QR code is not recognized, it prints "no find qrcode" through the serial port.
+
+##### get_identify_id
++ get_identify_id(uint8_t features, uint8_t index=0)
+
+Get the ID of the object being recognized
+
+> Interpretation of id in Different Modes
+>
+> + Color Block Tracking 
+>
+> id = 1 ~ 6, representing Red, Green, Blue, Yellow, Black, White.
+>
+> You can use the color macros defined in class AiCamera to judge.
+>
+> (Note: this value reflects the set color id, regardless of whether the block is detected.)
+>
+> + Tag Recognition 
+> + id = 0 ~ …, corresponds to the tag ID defined when generating the AprilTag
+> + 20-Class Object Recognition
+>
+> id = 0 ~ 19, representing:
+>
+> "airplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "dining table", "dog", "house", "motorbike", "person", "potted plant", "sheep", "sofa", "train", "tv monitor".
+>
+> + Face Recognition / Deep Learning
+>
+> id = 0 ~ 3, automatically assigned in order when learning.
+>
+> + Card Recognition 
+>
+> id = 0 ~ 6, representing:
+>
+> Green Light, Left Turn, Stop, Red Light, Right Turn, Horn, Target.
+>
+
+
+
+**Parameters:**
+
++ features — Function selection
+
+AI_CAMERA_PATCH — Color Block Tracking (single)
+
+AI_CAMERA_TAG — Tag Recognition (single)
+
+AI_CAMERA_20_CLASS — 20-Class Object Recognition (multi)
+
+AI_CAMERA_FACE_RE — Face Recognition (multi)
+
+AI_CAMERA_DEEP_LEARN — Deep Learning (single)
+
+AI_CAMERA_CARD — Card Recognition (multi)
+
++ index — Index of the recognized object
+    - Range: 0 ~ 3
+    - Only meaningful in multi-object recognition modes (20-Class, Face, Card).
+
+**Return Value:**
+
+id of the recognized object.
+
+Meaning depends on the selected mode (see explanation above).
+
+<font style="color:rgb(38, 38, 38);">Example 1: Judge the Recognized Tag ID</font>
+
+| ![](img/A31.png) | ![](img/A32.png) | ![](img/A33.png) |
+| --- | --- | --- |
+| ![](img/A34.png) | ![](img/A35.png) | ![](img/A36.png) |
+| ![](img/A37.png) | ![](img/A38.png) | ![](img/A39.png) |
+
+
+<font style="color:rgb(38, 38, 38);">ID tags from 0 to 8.</font>
+
+<font style="color:rgb(38, 38, 38);"></font>
+
+```cpp
+#include <Arduino.h>   // 引入 Arduino 头文件
+#include "ai_camera.h" // 引入 ai视觉模块的库头文件
+
+// 设置 ai 视觉模块操作句柄
+AiCamera ai_camrea_handle;
+
+void setup()
+{
+    Serial.begin(115200);      // 初始化串口
+    ai_camrea_handle.Init();   // 初始化
+    // 切换模式到标签识别模式
+    ai_camrea_handle.set_sys_mode(AI_CAMERA_TAG); 
+    delay(1000);               // 等待切换完成
+}
+
+void loop()
+{
+    // 判读是否找到标签
+    if (ai_camrea_handle.get_identify_num(AI_CAMERA_TAG) > 0)
+    {
+        // 获取标签id
+        int target_id = ai_camrea_handle.get_identify_id(AI_CAMERA_TAG);
+        Serial.print("tag id: ");
+        Serial.println(target_id);
+    }
+    else
+    {
+        Serial.println("no find tag");
+    }
+    delay(400);
+}
+```
+
+![](img/A40.gif)
+
+When the visual module does not recognize the tag, it prints "no find tag" on the serial port. When the tag is recognized, it prints the ID of the tag.
+
+****
 
