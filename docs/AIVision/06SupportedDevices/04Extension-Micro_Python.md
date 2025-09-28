@@ -1,4 +1,4 @@
-## Extension-Micro_Python
+# Extension-Micro_Python
 
 ## micro:bit Python User Guide
 ### Interface Overview
@@ -28,7 +28,7 @@ Click the link [micro:bit Python Editor](https://python.microbit.org/v/3/project
 
 **Step 2: In the pop-up window, select your desired language.**
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739093336591-bc52c413-917c-4fe2-b0ee-583122c4aeb4.png)_**<font style="color:#DF2A3F;">  
+![](img/P3.png)_**<font style="color:#DF2A3F;">  
 </font>**_**Note: It is recommended to use micro:bit V2.0 or above. Lower versions have insufficient memory and may not function properly.**
 
 _**<font style="color:#DF2A3F;"></font>**_
@@ -47,27 +47,27 @@ For users in Mainland China, visit [Gitee](https://gitee.com/cyc36880/microbit_p
 
 | gitee | github |
 | --- | --- |
-| ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757812851447-d61b16c8-2ce2-4f33-957c-1b0fef9393cb.png) | ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757812885125-1dc8f19b-bc8a-4221-9c82-d8d784635e8b.png) |
+| ![](img/P4.png) | ![](img/P5.png) |
 
 
 2. Click Download ZIP and wait for the browser to start downloading.
 
 | gitee | github |
 | --- | --- |
-| ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757813092215-9ce736b2-e8ed-477e-8028-c478d71cc4e8.png) | ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757813108978-72caa98f-ee3e-4e7d-b1f1-742ee1fc494c.png) |
+| ![](img/P6.png) | ![](img/P7.png) |
 
 
 3. Save the file to your computer.
 
 | gitee | github |
 | --- | --- |
-| ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757813336294-110abedb-c81c-481b-af78-953ce3f23a77.png) | ![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757813382822-f554e81f-4b49-47c4-b746-0474615b7d50.png) |
+| ![](img/P8.png) | ![](img/P9.png) |
 | | |
 
 
 4. Unzip the file and locate the required Python files.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1757813529936-c762ee7b-5278-4e67-90a7-e79abfbcf1ee.png)
+![](img/P10.png)
 
 When using the libraries, you should at least import the following files:
 
@@ -81,46 +81,46 @@ These files form the foundation for other device driver libraries. Without them,
 ##### Single File Import
 1. Click the Open button (lower-left or lower-right).
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739094773996-b5c32c10-d8d7-49c5-ac16-e58b1750857f.png)
+![](img/P11.png)
 
 
 
 2. Select the file you want to import and click Open.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739094831506-b0650920-f34d-4343-aaec-b6b5e8a55a3b.png)
+![](img/P12.png)
 
 
 
 3. Select the file you want to import and click Open.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739094935023-82c79d79-0ea4-47ea-8f07-dfd026cd3c62.png)
+![](img/P13.png)
 
 
 
 4. A success message appears at the top, and the file is added to the project list.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739095043237-521305a6-06f8-452e-978e-7076f8dce103.png)
+![](img/P14.png)
 
 ##### Multiple File Import
 The process is similar to single file import. (See demo GIF for details.)
 
-![](https://cdn.nlark.com/yuque/0/2025/gif/50993674/1739104070051-a4a45588-be66-4153-bccf-fd874bc7cebc.gif)
+![](img/P15.gif)
 
 #### Device Connection
 1. Use a microUSB cable to connect the hub and computer.
 
-![](https://cdn.nlark.com/yuque/0/2024/png/43021412/1732954995103-b799cad1-5338-442e-b28e-abbf569fc50c.png)
+![](img/P16.png)
 
 
 
 2. Use a Grove cable to connect the micro:bit with the vision module.
 
-![](https://cdn.nlark.com/yuque/0/2025/jpeg/50993674/1739495577629-9e4594e5-9aae-4d39-ba36-3a4b4ee8438b.jpeg)
+![](img/P17.jpg)
 
 
 
 #### Downloading Scripts
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739516394408-d895ae30-fc25-4d5a-8054-86d0f175bc8e.png)
+![](img/P18.png)
 
 
 
@@ -133,7 +133,7 @@ Ensure that the micro:bit is connected to your computer. Use the default starter
 
 **Default program effect:**
 
-![](https://cdn.nlark.com/yuque/0/2025/gif/50993674/1739512029203-1593fc06-9803-4555-a455-4789d7de6c64.gif)
+![](img/P19.gif)
 
 Display a heart icon.
 
@@ -167,13 +167,13 @@ All device drivers follow a similar usage pattern.
 #### Six-Way Grayscale Sensor
 Follow the library import steps. In addition to the required libraries, import six_gray.py.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739099208174-e82d0e35-36bf-4ef0-b622-9f1b12869e6d.png)
+![](img/P20.png)
 
 
 
 Connect the micro:bit to the six-way grayscale module using a Grove cable.
 
-![](https://cdn.nlark.com/yuque/0/2025/jpeg/50993674/1739496731045-10a6ebf5-95ca-486f-b6f6-1b52041d89cc.jpeg)
+![](img/P21.jpg)
 
 
 
@@ -191,12 +191,12 @@ while True:
     sleep(500)
 ```
 
-![](https://cdn.nlark.com/yuque/0/2025/gif/50993674/1739496508442-a7b58f5a-19a9-4213-a2ff-27450383bfa9.gif)
+![](img/P22.gif)
 
 #### OLED & Python Libraries
 Referring to the library import process, in addition to the libraries that must be imported, you also need to import oled.py libraries. The project files are shown in the figure below
 
-![](https://cdn.nlark.com/yuque/0/2025/png/50993674/1739099797203-c13d2c4e-ba88-4dd7-bc51-5c8ca953a8f5.png)
+![](img/P23.png)
 
 ```python
 from microbit import *
@@ -215,7 +215,7 @@ while True:
 
 ```
 
-![](https://cdn.nlark.com/yuque/0/2025/gif/50993674/1739497777836-d02bdb76-bf68-4ffa-a5b8-f1f6891a7bc8.gif)
+![](img/P24.gif)
 
 
 
