@@ -1,17 +1,17 @@
 # Extension – EV3
 ## Introduction
-![](img/E1.jpeg)
+![](img/E1.jpg)
 
 LEGO® MINDSTORMS® EV3 is the third-generation programmable robotics kit in the LEGO MINDSTORMS series. Released in 2013, EV3 was designed for education, makers, and robotics enthusiasts, and is especially suitable for youth to learn programming, engineering, and robotics. It remains widely used in schools, robotics competitions, and personal projects.
 
 ## Quick Start
 ### Hardware Preparation
-| ![](img/E2.jpeg) | ![](img/E3.png) |
+| ![](img/E2.jpg) | ![](img/E3.png) |
 | :---: | :---: |
 | EV3 Controller | K210 AI Vision Sensor |
 | ![](img/E4.png) | ![](img/E5.png) |
 | Adapter Board | Grove Male-to-Male Cable |
-| ![](img/E6.jpeg) |  |
+| ![](img/E6.jpg) |  |
 | EV3 Connection Cable |  |
 
 
