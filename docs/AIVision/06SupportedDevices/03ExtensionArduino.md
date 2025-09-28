@@ -843,6 +843,7 @@ When the visual module does not recognize the tag, it prints "no find tag" on th
 
 | ![](img/A41.jpg) | ![](img/A42.png) |
 | :---: | :---: |
+|  |  |
 
 
 <font style="color:rgb(38, 38, 38);">"Bike" and "car" pictures.</font>
