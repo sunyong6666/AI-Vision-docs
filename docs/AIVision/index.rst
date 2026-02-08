@@ -1,4 +1,4 @@
-AI Vision
+ICreateRobot AI Vision Sensor - Basic
 ========================
 
 .. toctree::
